@@ -1,0 +1,28 @@
+# --- Security headers ---
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# --- Compression ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript image/svg+xml
+</IfModule>
+
+# --- Browser cache ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css              "access plus 30 days"
+  ExpiresByType application/javascript "access plus 30 days"
+  ExpiresByType image/png             "access plus 30 days"
+  ExpiresByType image/jpeg            "access plus 30 days"
+  ExpiresByType application/pdf       "access plus 7 days"
+</IfModule>
+
+DirectoryIndex index.php index.html
+
+# --- Block dotfiles ---
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
